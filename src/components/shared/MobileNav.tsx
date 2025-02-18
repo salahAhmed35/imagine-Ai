@@ -6,9 +6,6 @@ import Link from "next/link";
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { navLinks } from "@/constants";
