@@ -64,6 +64,9 @@ body {
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -73,13 +76,10 @@ body {
   .sidebar{
     @apply  h-screen w-72 bg-red-500 p-5 shadow-md shadow-purple-200/50  
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
+  .root {
+    @apply flex min-h-screen w-full flex-col sm:flex-row bg-white lg:flex-row;
   }
-  body {
-    @apply bg-background text-foreground;
+  .root-container {
+    @apply mt-16 flex-1 sm:p-4 overflow-auto py-8 lg:mt-0 lg:max-h-screen lg:py-10
   }
 }
