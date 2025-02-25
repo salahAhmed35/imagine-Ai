@@ -14,9 +14,10 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { CustomField } from "./CustomField";
 import { defaultValues } from "@/constants";
 
-const formSchema = z.object({
+export const formSchema = z.object({
     title: z.string().nonempty(),
     aspectRatio: z.string().optional(),
     color: z.string().optional(),
@@ -44,7 +45,13 @@ const TransformationForm = ({action, data = null} : TransformationFormProps) => 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                
+                <CustomField 
+                control = {form.control}
+                name = "title"
+                formLabel="Image title"
+                className = "w-full"
+                render={({ field }) => <Input {...field} className = "input-field"/>}
+                />
             </form>
         </Form>
     )

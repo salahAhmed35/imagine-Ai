@@ -24,10 +24,10 @@ export const connectToDatabase = async () => {
   cached.promise = 
     cached.promise || 
     mongoose.connect(MONGODB_URL, { 
-      dbName: 'imaginify', bufferCommands: false 
+      dbName: 'imagineAi', bufferCommands: false 
     })
 
   cached.conn = await cached.promise;
-
+  console.log('db connected successfully');
   return cached.conn;
 }
