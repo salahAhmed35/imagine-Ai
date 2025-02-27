@@ -1,21 +1,20 @@
 "use client"
-import React from "react";
+import React, {useState} from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button"
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {Form} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { CustomField } from "./CustomField";
-import { defaultValues } from "@/constants";
+import { aspectRatioOptions, defaultValues, transformationTypes } from "@/constants";
+import { AspectRatioKey } from "@/lib/utils";
 
 export const formSchema = z.object({
     title: z.string().nonempty(),
@@ -25,7 +24,10 @@ export const formSchema = z.object({
     publicId: z.string()
 })
 
-const TransformationForm = ({action, data = null} : TransformationFormProps) => {
+const TransformationForm = ({action, data = null, userId, type, creditBalance} : TransformationFormProps) => {
+    const transformationType = transformationTypes[type];
+    const [image, setImage] = useState(data);
+    const [newTransformation, setNewTransformation] = useState<Transformations | null>(null)
     const initialValues = data && action === "Update" ? {
         title: data?.title,
         aspectRatio: data?.aspectRatio,
@@ -42,6 +44,9 @@ const TransformationForm = ({action, data = null} : TransformationFormProps) => 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
+    const onSelectFieldHandler = (value: string, onChangeField: (value: string) => void):void => {
+
+    }
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -52,6 +57,36 @@ const TransformationForm = ({action, data = null} : TransformationFormProps) => 
                 className = "w-full"
                 render={({ field }) => <Input {...field} className = "input-field"/>}
                 />
+                {type === 'fill' && (
+                   <CustomField
+                   control={form.control}
+                   name = "aspectRatio"
+                   formLabel="Aspect Ratio"
+                   className="w-full"
+                     render={({field}) => (
+                        <Select
+                        onValueChange={(value) => {
+                            onSelectFieldHandler(value, field.onChange)
+                        }}
+                        >
+                            <SelectTrigger className="select-field">
+                                <SelectValue placeholder="select size" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {
+                                    Object.keys(aspectRatioOptions).map((key)=> {
+                                        return(
+                                            <SelectItem key={key} value = {key}>
+                                            {aspectRatioOptions[key as AspectRatioKey].label}
+                                        </SelectItem>
+                                        )
+                                    })
+                                }
+                            </SelectContent>
+                      </Select>
+                     )}
+                    /> 
+                )}
             </form>
         </Form>
     )
