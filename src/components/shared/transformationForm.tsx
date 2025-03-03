@@ -28,7 +28,7 @@ export const formSchema = z.object({
   prompt: z.string().optional(),
   publicId: z.string(),
 });
-
+import TransformedImage from "./transformedImage";
 const TransformationForm = ({
   action,
   data = null,
@@ -214,6 +214,14 @@ const TransformationForm = ({
                    image={image}
                    type={type} />;
                }} 
+               />
+               <TransformedImage 
+                 image= {image}
+                 type = {type}
+                 title = {form.getValues().title}
+                 isTransforming= {isTransforming}
+                 setIsTransforming = {setIsTransforming}
+                 transformationConfig = {transformationConfig}
                />
         </div>
         <div className="flex flex-col gap-4">
