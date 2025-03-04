@@ -59,3 +59,5 @@ export async function deleteUser(clerkId: string) {
         handleError(error)
     }
 }
+
+// USE CREDITS

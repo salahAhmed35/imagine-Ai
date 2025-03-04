@@ -117,7 +117,7 @@ const TransformationForm = ({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
         <CustomField
           control={form.control}
           name="title"
@@ -201,7 +201,7 @@ const TransformationForm = ({
             )}
           </div>
         )}
-        <div className="media-uploader-field">
+        <div className="media-uploader-field flex justify-start">
           <CustomField 
              control={form.control}
               name="publicId"
