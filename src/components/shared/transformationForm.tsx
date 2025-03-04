@@ -29,6 +29,7 @@ export const formSchema = z.object({
   publicId: z.string(),
 });
 import TransformedImage from "./transformedImage";
+import { updateCredits } from "@/lib/actions/user.actions";
 const TransformationForm = ({
   action,
   data = null,
@@ -101,7 +102,6 @@ const TransformationForm = ({
   };
 
 
-    // TODO : Return to updateCredits
   const onTransformHandler = async () =>{
     setIsTransforming(true);
     setTransformationConfig(
@@ -112,7 +112,7 @@ const TransformationForm = ({
     )
     setNewTransformation(null);
     startTransation(async () => {
-        // await updateCredits(useId, creditFree)
+        await updateCredits(userId, -1)
     })
   }
   return (
