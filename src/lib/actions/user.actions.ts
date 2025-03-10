@@ -67,7 +67,7 @@ export async function updateCredits(userId: string, creditFee: number){
         await connectToDatabase();
         const updatedUserCredits = await User.findByIdAndUpdate(
             { _id: userId},
-            {$inc: {credits: creditFee}},
+            {$inc: {creditsBalance: creditFee}},
             {new: true}
         )
         if(!updatedUserCredits){

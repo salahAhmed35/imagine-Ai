@@ -1,3 +1,5 @@
+import { boolean } from "zod";
+
 export const navLinks = [
     {
       label: "Home",
@@ -190,4 +192,43 @@ export const navLinks = [
     publicId: "",
   };
   
-  export const creditFee = -1;
+export const creditFee = -1;
+
+export const pricingPlans = [
+  {
+    name: "Free",
+    price: 0,
+    credits: 10,
+    icon : "/assets/free_plan.png",
+    features: {
+      "Standard image editing" : true,
+      "Limited style options" : true,
+      "priority processing" : false,
+      "commercial use rights" : false
+    } as {[key: string] : boolean}
+  },
+  {
+    name: "Basic",
+    price: 25,
+    credits: 100,
+    icon : "/assets/basic_plan.png",
+    features: {
+      "High-resolution image generation": true,
+      "Access to premium styles and filters": true,
+      "Faster processing": true,
+      "Basic commercial use rights" : true
+    }
+  },
+  {
+    name: "premium",
+    price: 50,
+    credits: 1500,
+    icon : "/assets/premium_plan.png",
+    features: {
+      "Ultra high-resolution image generation": true,
+      "Full access to all AI styles, effects, and enhancements": true,
+      "Priority processing": true,
+      "Full commercial use rights": true,
+    }
+  }
+];
