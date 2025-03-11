@@ -1,7 +1,6 @@
 import React from "react";
 import { pricingPlans } from "@/constants";
 import Image from "next/image";
-import { features } from "process";
 const CreditPage = () => {
     return (
         <>

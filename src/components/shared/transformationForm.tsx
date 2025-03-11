@@ -18,7 +18,7 @@ import {
   defaultValues,
   transformationTypes,
 } from "@/constants";
-import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils";
+import { AspectRatioKey, debounce, deepMergeObjects,getImageSize } from "@/lib/utils";
 import { Button } from "../ui/button";
 import MediaUploader from "./mediaUploader";
 import { creditFee } from "@/constants";
@@ -144,25 +144,27 @@ const TransformationForm = ({
   };
 
 
+  const debouncedInputHandler = debounce((updateFunction) => updateFunction(), 1000);
+
   const onInputChangeHandler = (
     fieldName: string,
     value: string,
     type: string,
     onChangeField: (value: string) => void
   ) => {
-    debounce(() => {
-        setNewTransformation((prevState: any) => ({
-            ...prevState,
-            [type]: {
-                ...prevState?.[type],
-                [fieldName === 'prompt' ? 'prompt' : 'to'] : value
-
-            }
-        }))
-        return onChangeField(value)
-    }, 1000);
+    onChangeField(value); // Immediately update field value for input visibility
+    
+    debouncedInputHandler(() => {
+      setNewTransformation((prevState: any) => ({
+        ...prevState,
+        [type]: {
+          ...prevState?.[type],
+          [fieldName === "prompt" ? "prompt" : "to"]: value
+        }
+      }));
+    });
   };
-
+  
 
   const onTransformHandler = async () =>{
     setIsTransforming(true);

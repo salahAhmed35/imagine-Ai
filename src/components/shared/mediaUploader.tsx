@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from "sonner"
 import { CldUploadWidget, CldImage } from 'next-cloudinary';
 import Image from "next/image";
-import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import { getImageSize } from "@/lib/utils";
 type MediaUploaderProps = {
   onChangeValue: (value: string) => void;
   setImage: React.Dispatch<any>;
@@ -55,11 +55,14 @@ const MediaUploader = ({onChangeValue, setImage, image, type, publicId} : MediaU
                 <>
                   <div className="cursor-pointer rounded-[10px]">
                     <CldImage 
-                      width={250}
-                      height={250}
-                      src={publicId}
-                      alt="image"
-                      className="cld-image" />
+                  width={getImageSize(type, image, "width")}
+                  height={getImageSize(type, image, "height")}
+                  src={publicId}
+                  alt="image"
+                  sizes={"(max-width: 767px) 100vw, 50vw"}
+                  // placeholder={dataUrl as PlaceholderValue}
+                  className="media-uploader_cldImage"
+                  />
                   </div>
                 </>
               ) : (

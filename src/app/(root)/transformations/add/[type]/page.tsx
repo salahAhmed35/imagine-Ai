@@ -16,7 +16,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
 
   return (
     <>
-      <div className="p-3">
+      <div className="p-3 md:w-[950px] mx-auto">
         <Header
           title={transformation.title}
           subtitle={transformation.subTitle}
